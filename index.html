@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>초등학생을 위한 4주 완성 AI 체험 강의안</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --secondary: #0ea5e9;
+      --accent: #f59e0b;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.65;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
+      margin-bottom: 2.5rem;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.92;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .overview-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+    }
+
+    .overview-card h2 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-box {
+      background: var(--primary-light);
+      padding: 1.1rem 1.25rem;
+      border-radius: 12px;
+    }
+
+    .info-box .label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-box .value {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .goals-list {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .goals-list h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-dark);
+    }
+
+    .goals-list ol {
+      padding-left: 1.25rem;
+      color: var(--text-dark);
+    }
+
+    .goals-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .week-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .week-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .week-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    .week-header {
+      padding: 1.5rem 2rem;
+      background: linear-gradient(to right, #eef2ff, #f8fafc);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .week-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .week-header h3 {
+      font-size: 1.35rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .question-box {
+      display: inline-block;
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .week-body {
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .period-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .period-box h4 {
+      font-size: 1.08rem;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .period-box ul {
+      list-style: none;
+    }
+
+    .period-box > ul > li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .period-box > ul > li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .period-box ul ul {
+      margin-top: 0.4rem;
+      padding-left: 1rem;
+      font-size: 0.93rem;
+      color: var(--text-muted);
+    }
+
+    .period-box ul ul li {
+      margin-bottom: 0.3rem;
+      position: relative;
+      padding-left: 0.85rem;
+    }
+
+    .period-box ul ul li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .time-badge {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .tool-highlight {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.92em;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 2rem 1.25rem;
+      }
+      header h1 {
+        font-size: 1.75rem;
+      }
+      .week-header, .week-body, .overview-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">초등 AI 융합 교육 커리큘럼</span>
+      <h1>초등학생을 위한 4주 완성 AI 체험 강의안</h1>
+      <p>흥미 유발부터 원리 체험, 창작 활동, 디지털 윤리와 작품 발표까지 이어지는 맞춤형 인공지능 수업 지도안</p>
+    </header>
+
+    <section class="overview-card">
+      <h2>📋 강의 개요</h2>
+      <div class="overview-grid">
+        <div class="info-box">
+          <div class="label">교육 대상</div>
+          <div class="value">초등학교 4~6학년 (저학년은 그림·음성 도구 대체 가능)</div>
+        </div>
+        <div class="info-box">
+          <div class="label">수업 시간</div>
+          <div class="value">주 1회, 회당 80분 (40분×2교시) × 4주</div>
+        </div>
+        <div class="info-box">
+          <div class="label">준비물</div>
+          <div class="value">태블릿 PC 또는 노트북(카메라/마이크), 스케치북, 색연필</div>
+        </div>
+      </div>
+      <div class="goals-list">
+        <h3>🎯 교육 목표</h3>
+        <ol>
+          <li>일상 속 인공지능의 개념과 학습 원리(머신러닝)를 이해한다.</li>
+          <li>다양한 생성형 AI 도구를 활용해 나만의 창작물(글, 그림, 음악 등)을 만든다.</li>
+          <li>올바른 AI 활용 태도와 디지털 윤리를 익힌다.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="week-section">
+      <!-- 1주차 -->
+      <article class="week-card">
+        <div class="week-header">
+          <span class="week-tag">1주차</span>
+          <h3>인공지능아, 반가워! (AI의 개념과 이미지 인식)</h3>
+          <div class="question-box">💡 핵심 질문: "인공지능은 사람처럼 어떻게 보고 배울까?"</div>
+        </div>
+        <div class="week-body">
+          <div class="period-box">
+            <h4>1교시 (이론 및 탐색): 우리 주변의 AI 찾기</h4>
+            <ul>
+              <li><span class="time-badge">도입 (10분)</span>: 'AI일까, 아닐까?' 퀴즈 (자동문 vs 로봇청소기, 계산기 vs 유튜브 추천 알고리즘)</li>
+              <li><span class="time-badge">전개 (20분)</span>: 규칙대로만 움직이는 프로그램과 스스로 데이터를 보고 배우는 인공지능(머신러닝)의 차이점 알아보기</li>
+              <li><span class="time-badge">활동 (10분)</span>: <span class="tool-highlight">퀵드로우(Quick, Draw!)</span> 게임을 통해 AI가 내 낙서를 어떻게 맞추는지 체험하기</li>
+            </ul>
+          </div>
+          <div class="period-box">
+            <h4>2교시 (실습): 내가 직접 가르치는 AI</h4>
+            <ul>
+              <li><span class="time-badge">실습 (30분)</span>: <span class="tool-highlight">티처블 머신(Teachable Machine)</span> 활용 실습
+                <ul>
+                  <li>웹캠을 이용해 '가위·바위·보' 손모양 또는 '웃는 얼굴·화난 얼굴' 데이터를 직접 촬영해 학습시키기</li>
+                  <li>짝꿍의 손모양이나 표정도 AI가 잘 맞추는지 테스트하고, 왜 틀리는지(데이터 부족/배경 차이 등) 이야기 나누기</li>
+                </ul>
+              </li>
+              <li><span class="time-badge">정리 (10분)</span>: 소감 나누기 ("AI를 똑똑하게 만들려면 좋은 데이터가 많이 필요해요!")</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2주차 -->
+      <article class="week-card">
+        <div class="week-header">
+          <span class="week-tag">2주차</span>
+          <h3>AI와 함께 상상을 그려요! (생성형 AI와 이미지·소리)</h3>
+          <div class="question-box">💡 핵심 질문: "인공지능도 그림을 그리고 음악을 만들 수 있을까?"</div>
+        </div>
+        <div class="week-body">
+          <div class="period-box">
+            <h4>1교시 (시각 생성 체험): 말을 그림으로 바꾸는 마법</h4>
+            <ul>
+              <li><span class="time-badge">도입 (10분)</span>: 사람이 그린 그림 vs AI가 그린 그림 맞히기 퀴즈</li>
+              <li><span class="time-badge">전개 (15분)</span>: 원하는 그림을 얻기 위해 구체적으로 설명하는 방법(프롬프트의 기초: 주인공 + 행동 + 배경 + 화풍) 배우기</li>
+              <li><span class="time-badge">활동 (15분)</span>: <span class="tool-highlight">오토드로우(AutoDraw)</span> 또는 어린이용 이미지 생성 도구(Canva Magic Media 등)로 '내가 꿈꾸는 미래의 학교' 또는 '상상 속 동물' 그리기</li>
+            </ul>
+          </div>
+          <div class="period-box">
+            <h4>2교시 (청각·융합 실습): AI 캐릭터와 테마곡 만들기</h4>
+            <ul>
+              <li><span class="time-badge">실습 (30분)</span>:
+                <ul>
+                  <li>1교시에 만든 상상 속 동물/캐릭터에게 이름과 성격 붙여주기</li>
+                  <li><span class="tool-highlight">크롬 뮤직랩(Chrome Music Lab)</span> 또는 AI 음악 도구를 활용해 캐릭터에 어울리는 짧은 배경음악 만들기</li>
+                </ul>
+              </li>
+              <li><span class="time-badge">정리 (10분)</span>: 친구들이 만든 캐릭터와 음악 감상하기</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3주차 -->
+      <article class="week-card">
+        <div class="week-header">
+          <span class="week-tag">3주차</span>
+          <h3>AI와 대화하며 동화책 만들기 (대화형 AI와 스토리텔링)</h3>
+          <div class="question-box">💡 핵심 질문: "AI에게 어떻게 질문해야 똑똑한 대답을 들을 수 있을까?"</div>
+        </div>
+        <div class="week-body">
+          <div class="period-box">
+            <h4>1교시 (이론 및 실습): 챗봇과 대화하는 법</h4>
+            <ul>
+              <li><span class="time-badge">도입 (10분)</span>: 스무고개 게임으로 알아보는 '좋은 질문'의 조건</li>
+              <li><span class="time-badge">전개 (15분)</span>: 대화형 AI에게 역할 부여하기, 구체적으로 질문하기(프롬프트 엔지니어링 기초) 연습</li>
+              <li><span class="time-badge">활동 (15분)</span>: AI와 릴레이 끝말잇기, 수수께끼 내기, 내가 좋아하는 주제로 3줄 시 짓기</li>
+            </ul>
+          </div>
+          <div class="period-box">
+            <h4>2교시 (실습): 나만의 미니 AI 그림동화 기획하기</h4>
+            <ul>
+              <li><span class="time-badge">실습 (30분)</span>:
+                <ul>
+                  <li>2주차에 만든 캐릭터를 주인공으로 4컷 동화(기-승-전-결) 줄거리를 AI와 함께 구상하기</li>
+                  <li>각 장면에 어울리는 삽화를 생성하여 활동지(또는 캔바/구글 슬라이드 템플릿)에 배치하기</li>
+                </ul>
+              </li>
+              <li><span class="time-badge">정리 (10분)</span>: AI가 지어낸 이야기 중 어색한 부분을 내 생각으로 고쳐보기 (주도성 강조)</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4주차 -->
+      <article class="week-card">
+        <div class="week-header">
+          <span class="week-tag">4주차</span>
+          <h3>바르게 쓰는 AI와 나만의 작품 발표회 (AI 윤리와 프로젝트 완성)</h3>
+          <div class="question-box">💡 핵심 질문: "인공지능을 사용할 때 우리가 꼭 지켜야 할 약속은 무엇일까?"</div>
+        </div>
+        <div class="week-body">
+          <div class="period-box">
+            <h4>1교시 (토론 및 윤리): AI도 거짓말을 할까요?</h4>
+            <ul>
+              <li><span class="time-badge">도입 (10분)</span>: AI가 그럴듯하게 지어낸 거짓말(할루시네이션) 사례와 편향성 살펴보기</li>
+              <li><span class="time-badge">전개 (20분)</span>: 딥페이크·저작권 문제·숙제 베끼기 등 사례를 놓고 O/X 퀴즈 및 모둠 토론 진행</li>
+              <li><span class="time-badge">활동 (10분)</span>: <strong>'우리 반 AI 바른 사용 5계명'</strong> 함께 만들고 선서하기</li>
+            </ul>
+          </div>
+          <div class="period-box">
+            <h4>2교시 (발표 및 수료): AI 창작물 전시회 및 발표</h4>
+            <ul>
+              <li><span class="time-badge">실습 및 발표 (30분)</span>:
+                <ul>
+                  <li>3주차에 만든 4컷 동화책 최종 완성 후 친구들 앞에서 발표하기</li>
+                  <li>갤러리 워크 방식으로 돌아가며 감상 및 칭찬 스티커 붙이기</li>
+                </ul>
+              </li>
+              <li><span class="time-badge">정리 (10분)</span>: 4주간의 수업 돌아보기 및 '꼬마 AI 마스터 수료증' 수여</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <p>© 초등 AI 체험 교육 커리큘럼 (4주 과정)</p>
+    </footer>
+  </div>
+</body>
+</html>
